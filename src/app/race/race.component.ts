@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RaceModel } from '../models/race.model';
+import { PonyModel } from '../models/pony.model';
 
 @Component({
   selector: 'pr-race',
@@ -9,6 +10,10 @@ import { RaceModel } from '../models/race.model';
 export class RaceComponent implements OnInit {
 
   @Input() raceModel: RaceModel;
+
+  ponyClicked(pony: PonyModel) {
+
+  }
 
   constructor() { }
 
