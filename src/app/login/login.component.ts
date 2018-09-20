@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CredentialsModel } from '../models/credentials.model';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'pr-login',
@@ -10,12 +10,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  credentials: CredentialsModel = {
+  credentials = {
     login: '',
     password: ''
   };
-
   authenticationFailed = false;
+
+  constructor(private router: Router, private userService: UserService) {
+  }
+
+  ngOnInit() {
+  }
 
   authenticate() {
     this.authenticationFailed = false;
@@ -24,11 +29,6 @@ export class LoginComponent implements OnInit {
         () => this.router.navigate(['/']),
         () => this.authenticationFailed = true
       );
-  }
-
-  constructor(private userService: UserService, private router: Router) { }
-
-  ngOnInit() {
   }
 
 }

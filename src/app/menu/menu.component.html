@@ -1,22 +1,20 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="[ '']">PonyRacer</a>
-  <button type="button" class="navbar-toggler navbar-toggler-right" (click)="toggleNavbar()">
+  <a class="navbar-brand" routerLink="/">PonyRacer</a>
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div id="navbar" class="navbar-toggleable-sm" [ngClass]="{'collapse': navbarCollapsed}">
+  <div id="navbar" class="navbar-collapse" [class.collapse]="navbarCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/races">Races</a>
+      </li>
+    </ul>
     <div class="nav navbar-nav">
-      <ul>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="[ '/races']">Races</a>
-        </li>
-        <div class="nav navbar-nav">
-          <span *ngIf="user" class="nav-item navbar-text mr-2">
-              {{ user.login }}
-              <span class="fa fa-star"></span>
-              {{ user.money }}
-          </span>
-        </div>
-      </ul>
+      <span class="nav-item navbar-text mr-2" *ngIf="user">
+        {{ user.login }}
+        <span class="fa fa-star"></span>
+        {{ user.money }}
+      </span>
     </div>
   </div>
 </nav>
