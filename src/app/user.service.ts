@@ -22,8 +22,20 @@ export class UserService {
 
   authenticate(credentials: { login: string; password: string }): Observable<UserModel> {
     return this.http.post<UserModel>('http://ponyracer.ninja-squad.com/api/users/authentication', credentials).pipe(
-      tap((user: UserModel) => this.userEvents.next(user))
+      tap((user: UserModel) => this.storeLoggedInUser(user))
     );
+  }
+
+  storeLoggedInUser(user: UserModel) {
+    window.localStorage.setItem('rememberMe', JSON.stringify(user));
+    this.userEvents.next(user);
+  }
+
+  retrieveUser() {
+    const user = window.localStorage.getItem('rememberMe');
+    if (user) {
+      this.userEvents.next(JSON.parse(user));
+    }
   }
 
 }
