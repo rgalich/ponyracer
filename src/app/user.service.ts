@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject , Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 import { UserModel } from './models/user.model';
 
@@ -17,11 +18,11 @@ export class UserService {
 
   register(login: string, password: string, birthYear: number): Observable<UserModel> {
     const body = { login, password, birthYear };
-    return this.http.post<UserModel>('http://ponyracer.ninja-squad.com/api/users', body);
+    return this.http.post<UserModel>(`${environment.baseUrl}/api/users`, body);
   }
 
   authenticate(credentials: { login: string; password: string }): Observable<UserModel> {
-    return this.http.post<UserModel>('http://ponyracer.ninja-squad.com/api/users/authentication', credentials).pipe(
+    return this.http.post<UserModel>(`${environment.baseUrl}/api/users/authentication`, credentials).pipe(
       tap((user: UserModel) => this.storeLoggedInUser(user))
     );
   }
