@@ -24,4 +24,8 @@ export class RaceService {
     return this.http.get<RaceModel>(`http://ponyracer.ninja-squad.com/api/races/${raceId}`);
   }
 
+  cancelBet(raceId: number): Observable<void> {
+    return this.http.delete<void>(`http://ponyracer.ninja-squad.com/api/races/${raceId}/bets`);
+  }
+
 }
