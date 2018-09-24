@@ -12,6 +12,7 @@ import { PonyModel } from '../models/pony.model';
 export class BetComponent implements OnInit {
 
   raceModel: RaceModel;
+  betFailed = false;
 
   constructor(private activatedRoute: ActivatedRoute, private raceService: RaceService) { }
 
@@ -23,7 +24,7 @@ export class BetComponent implements OnInit {
   }
 
   betOnPony(pony: PonyModel) {
-    this.raceService.bet(this.raceModel.id, pony.id).subscribe(race => this.raceModel = race);
+    this.raceService.bet(this.raceModel.id, pony.id).subscribe(race => this.raceModel = race, () => this.betFailed = true);
   }
 
   isPonySelected(pony: PonyModel): boolean {
