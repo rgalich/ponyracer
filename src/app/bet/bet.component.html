@@ -1,0 +1,9 @@
+<div *ngIf="raceModel">
+  <h2>{{ raceModel.name }}</h2>
+  <p>{{ raceModel.startInstant | fromNow }}</p>
+  <div class="row">
+    <div *ngFor="let pony of raceModel.ponies" class="col-12 col-md-2" [ngClass]="{'selected': isPonySelected}">
+      <pr-pony (ponyClicked)="betOnPony(pony)" [ponyModel]="pony"></pr-pony>
+    </div>
+  </div>
+</div>
