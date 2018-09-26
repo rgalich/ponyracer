@@ -35,8 +35,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   logout(event: Event) {
-    this.userService.logout();
     event.preventDefault();
+    this.userService.logout();
     this.router.navigate(['/']);
   }
 

@@ -40,7 +40,7 @@ describe('MenuComponent', () => {
     menu.toggleNavbar();
 
     expect(menu.navbarCollapsed)
-      .toBe(false, '`toggleNavbar()` should change `navbarCollapsed` from true to false`');
+      .toBe(false, '`toggleNavbar()` should change `navbarCollapsed` from `true` to `false`');
 
     menu.toggleNavbar();
 

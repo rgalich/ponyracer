@@ -13,11 +13,8 @@ export const ROUTES: Routes = [
     path: 'races',
     children: [
       { path: '', component: RacesComponent },
-      { path: ':raceId',
-        children: [
-          { path: '', component: BetComponent },
-          { path: 'live', component: LiveComponent }
-        ]}
+      { path: ':raceId', component: BetComponent },
+      { path: ':raceId/live', component: LiveComponent }
     ]
   },
   { path: 'register', component: RegisterComponent },

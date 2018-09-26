@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { ROUTES } from './app.routes';
@@ -39,10 +39,10 @@ import { LiveComponent } from './live/live.component';
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
-  bootstrap: [AppComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true }
-  ]
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

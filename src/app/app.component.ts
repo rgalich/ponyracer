@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from './user.service';
 
 @Component({
   selector: 'pr-root',
@@ -8,8 +7,4 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   title = 'ponyracer';
-
-  constructor(private userService: UserService) {
-    this.userService.retrieveUser();
-  }
 }

@@ -1,15 +1,17 @@
-import { Injectable, Type, Inject } from '@angular/core';
+import { Inject, Injectable, Type } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
+import { Client, Subscription} from 'webstomp-client';
+
 import { environment } from '../environments/environment';
 import { WEBSOCKET, WEBSTOMP } from './app.tokens';
-import { Client, Subscription} from 'webstomp-client';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class WsService {
 
-  constructor(@Inject(WEBSOCKET) private WebSocket: Type<WebSocket>, @Inject(WEBSTOMP) private Webstomp: any) {}
+  constructor(@Inject(WEBSOCKET) private WebSocket: Type<WebSocket>, @Inject(WEBSTOMP) private Webstomp: any) { }
 
   connect<T>(channel: string): Observable<T> {
     return Observable.create((observer: Observer<T>) => {
@@ -21,10 +23,7 @@ export class WsService {
           const bodyAsJson = JSON.parse(message.body);
           observer.next(bodyAsJson);
         });
-        }, error => {
-          // propagate the error
-          observer.error(error);
-      });
+      }, error => observer.error(error));
       return () => {
         if (subscription) {
           subscription.unsubscribe();

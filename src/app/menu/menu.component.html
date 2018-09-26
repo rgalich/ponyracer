@@ -6,7 +6,7 @@
   <div id="navbar" class="navbar-collapse" [class.collapse]="navbarCollapsed">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a *ngIf="user" class="nav-link" routerLink="/races">Races</a>
+        <a class="nav-link" *ngIf="user" routerLink="/races">Races</a>
       </li>
     </ul>
     <div class="nav navbar-nav">
@@ -15,8 +15,8 @@
         <span class="fa fa-star"></span>
         {{ user.money }}
       </span>
-      <a *ngIf="user" class="nav-item nav-link" href="#" (click)="logout($event)">
-        <span (click)="logout" class="fa fa-power-off"></span>
+      <a (click)="logout($event)" class="nav-item nav-link" href="#" *ngIf="user">
+        <span class="fa fa-power-off"></span>
       </a>
     </div>
   </div>
