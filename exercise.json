@@ -1,1 +1,1 @@
-{"pack":"31","id":22,"title":"WebSockets","specs":[{"name":"src/app/race.service.spec.ts","hash":"1dccf749680849eccdb24f738816325397de647a"},{"name":"src/app/ws.service.spec.ts","hash":"c637e0e3c9b64412b9adaac86031abd33a0176f7"}]}
+{"pack":"31","id":23,"title":"Observable tips and tricks","specs":[{"name":"src/app/live/live.component.spec.ts","hash":"92a51283636695f350b71d0d3ba04d8a306903f7"},{"name":"src/app/race.service.spec.ts","hash":"3150480e14198f246087b99869a0740126a6b0b7"}]}

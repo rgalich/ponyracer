@@ -6,9 +6,10 @@ export interface RaceModel {
   ponies: Array<PonyModel>;
   startInstant: string;
   betPonyId?: number;
+  status?: 'PENDING' | 'RUNNING' | 'FINISHED';
 }
 
-export interface LiveRaceModel {
+export interface LiveRaceModel extends RaceModel {
   ponies: Array<PonyWithPositionModel>;
 }
 
