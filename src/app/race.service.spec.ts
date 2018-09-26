@@ -75,10 +75,13 @@ describe('RaceService', () => {
   it('should cancel a bet on a race', () => {
     const raceId = 1;
 
-    raceService.cancelBet(raceId).subscribe(() => {});
+    let called = false;
+    raceService.cancelBet(raceId).subscribe(() => called = true);
 
     http.expectOne({ method: 'DELETE', url: `${environment.baseUrl}/api/races/${raceId}/bets` })
       .flush(null);
+
+    expect(called).toBe(true);
   });
 
   it('should return live positions from websockets', () => {
@@ -132,6 +135,22 @@ describe('RaceService', () => {
 
     expect(positions.length).toBe(1);
     expect(positions[0].position).toBe(100, 'The observable should stop emitting if the race status is FINISHED');
+  });
+
+  it('should boost a pony in a race', () => {
+    // fake response
+    const race = { name: 'Paris' } as RaceModel;
+    const ponyId = 12;
+    const raceId = 1;
+
+    let actualRace;
+    raceService.boost(raceId, ponyId).subscribe(fetchedRace => actualRace = fetchedRace);
+
+    const req = http.expectOne({ method: 'POST', url: `${environment.baseUrl}/api/races/${raceId}/boosts` });
+    expect(req.request.body).toEqual({ ponyId });
+    req.flush(race);
+
+    expect(actualRace).toBe(race, 'The observable must emit the race');
   });
 
 });
