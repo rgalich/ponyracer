@@ -1,4 +1,3 @@
-import { RacesResolverService } from './races-resolver.service';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
@@ -10,25 +9,50 @@ import { LiveComponent } from './live/live.component';
 import { LoggedInGuard } from './logged-in.guard';
 import { PendingRacesComponent } from './races/pending-races/pending-races.component';
 import { FinishedRacesComponent } from './races/finished-races/finished-races.component';
+import { RacesResolverService } from './races-resolver.service';
+import { RaceResolverService } from './race-resolver.service';
 
 export const ROUTES: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'races', component: RacesComponent, canActivate: [LoggedInGuard],
+    path: 'races',
+    canActivate: [LoggedInGuard],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'pending' },
-      { path: 'pending', component: PendingRacesComponent,
-        resolve: {
-          races: RacesResolverService
-        },
+      {
+        path: '',
+        component: RacesComponent,
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'pending' },
+          {
+            path: 'pending',
+            component: PendingRacesComponent,
+            resolve: {
+              races: RacesResolverService
+            }
+          },
+          {
+            path: 'finished',
+            component: FinishedRacesComponent,
+            resolve: {
+              races: RacesResolverService
+            }
+          },
+        ]
       },
-      { path: 'finished', component: FinishedRacesComponent,
+      {
+        path: ':raceId',
+        component: BetComponent,
         resolve: {
-          races: RacesResolverService
-        },
+          race: RaceResolverService
+        }
       },
-      { path: ':raceId', component: BetComponent },
-      { path: ':raceId/live', component: LiveComponent }
+      {
+        path: ':raceId/live',
+        component: LiveComponent,
+        resolve: {
+          race: RaceResolverService
+        }
+      }
     ]
   },
   { path: 'register', component: RegisterComponent },

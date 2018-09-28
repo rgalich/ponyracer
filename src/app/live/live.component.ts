@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, Subject, interval, EMPTY } from 'rxjs';
-import { filter, switchMap, tap, groupBy, mergeMap, bufferToggle, throttleTime, map, catchError } from 'rxjs/operators';
+import { Subject, Subscription, interval, EMPTY } from 'rxjs';
+import { bufferToggle, catchError, filter, groupBy, map, mergeMap, switchMap, throttleTime } from 'rxjs/operators';
 
 import { RaceService } from '../race.service';
 import { RaceModel } from '../models/race.model';
@@ -18,7 +18,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   poniesWithPosition: Array<PonyWithPositionModel> = [];
   positionSubscription: Subscription;
   error: boolean;
-  winners: Array<PonyWithPositionModel>;
+  winners: Array<PonyWithPositionModel> = [];
   betWon: boolean;
   clickSubject = new Subject<PonyWithPositionModel>();
 
@@ -26,23 +26,23 @@ export class LiveComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('raceId');
-    this.positionSubscription = this.raceService.get(id).pipe(
-      tap((race: RaceModel) => this.raceModel = race),
-      filter(race => this.raceModel.status !== 'FINISHED'),
-      switchMap(race => this.raceService.live(race.id))
-    ).subscribe(
-      positions => {
-        this.poniesWithPosition = positions;
-        this.raceModel.status = 'RUNNING';
-      },
-      error => this.error = true,
-      () => {
-        this.raceModel.status = 'FINISHED';
-        this.winners = this.poniesWithPosition.filter(pony => pony.position >= 100);
-        this.betWon = this.winners.some(pony => pony.id === this.raceModel.betPonyId);
-      }
-    );
+    this.raceModel = this.route.snapshot.data['race'];
+
+    if (this.raceModel.status !== 'FINISHED') {
+      this.positionSubscription = this.raceService.live(this.raceModel.id)
+        .subscribe(
+          positions => {
+            this.poniesWithPosition = positions;
+            this.raceModel.status = 'RUNNING';
+          },
+          error => this.error = true,
+          () => {
+            this.raceModel.status = 'FINISHED';
+            this.winners = this.poniesWithPosition.filter(pony => pony.position >= 100);
+            this.betWon = this.winners.some(pony => pony.id === this.raceModel.betPonyId);
+          }
+        );
+    }
 
     this.clickSubject.pipe(
       groupBy(pony => pony.id, pony => pony.id),
