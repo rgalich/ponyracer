@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { of, throwError } from 'rxjs';
 
-import { AppModule } from '../app.module';
+import { UsersModule } from '../users/users.module';
 import { RegisterComponent } from './register.component';
 import { UserService } from '../user.service';
 
@@ -15,7 +15,7 @@ describe('RegisterComponent', () => {
   const fakeRouter = jasmine.createSpyObj('Router', ['navigate']);
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [AppModule, RouterTestingModule],
+    imports: [UsersModule, RouterTestingModule],
     providers: [
       { provide: UserService, useValue: fakeUserService },
       { provide: Router, useValue: fakeRouter }
@@ -207,7 +207,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should have min/max validators to check the year validity', () => {
-    const fixture: ComponentFixture<RegisterComponent> = TestBed.createComponent(RegisterComponent);
+    const fixture = TestBed.createComponent(RegisterComponent);
     fixture.detectChanges();
 
     const componentInstance = fixture.componentInstance;

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { Subject, of, EMPTY } from 'rxjs';
 
-import { AppModule } from '../app.module';
+import { RacesModule } from '../races/races.module';
 import { LiveComponent } from './live.component';
 import { RaceService } from '../race.service';
 import { PonyWithPositionModel } from '../models/pony.model';
@@ -16,7 +16,7 @@ describe('LiveComponent', () => {
   const fakeRaceService = jasmine.createSpyObj('RaceService', ['live', 'boost']);
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [AppModule, RouterTestingModule],
+    imports: [RacesModule, RouterTestingModule],
     providers: [
       { provide: RaceService, useValue: fakeRaceService }
     ]
