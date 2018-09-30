@@ -1,10 +1,10 @@
+/* tslint:disable:directive-selector */
 import { FormLabelDirective } from './form-label.directive';
 import { NgControl } from '@angular/forms';
 import { Directive, ContentChild, AfterContentInit } from '@angular/core';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: '[.form-group]'
+  selector: '.form-group'
 })
 export class FormLabelValidationDirective implements AfterContentInit {
 
@@ -20,7 +20,7 @@ export class FormLabelValidationDirective implements AfterContentInit {
   ngAfterContentInit() {
     if (this.ngControl && this.label) {
       this.setLabelValidity();
-      this.ngControl.statusChanges.subscribe(() => this.setLabelValidity);
+      this.ngControl.statusChanges.subscribe(() => this.setLabelValidity());
     }
   }
 
