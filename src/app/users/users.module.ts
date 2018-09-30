@@ -5,13 +5,15 @@ import { RegisterComponent } from './../register/register.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(USERS_ROUTES)
+    RouterModule.forChild(USERS_ROUTES),
+    SharedModule
   ],
   declarations: [
     RegisterComponent,
