@@ -1,7 +1,7 @@
 <div>
   <h2>{{ raceModel.name }}</h2>
   
-  <div class="alert alert-danger" *ngIf="error"></div>
+  <pr-alert [dismissible]="false" type="danger" *ngIf="error">A problem occurred during the live.</pr-alert>
   
   <div id="live-race" [ngSwitch]="raceModel.status">
     <div *ngSwitchCase="'FINISHED'">

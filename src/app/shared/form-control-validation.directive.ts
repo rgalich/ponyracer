@@ -3,7 +3,7 @@ import { NgControl } from '@angular/forms';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
-  selector: '[.form-control]'
+  selector: '.form-control'
 })
 export class FormControlValidationDirective {
 
