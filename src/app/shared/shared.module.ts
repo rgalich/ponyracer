@@ -18,7 +18,8 @@ import { FormLabelValidationDirective } from './form-label-validation.directive'
   exports: [
     AlertComponent,
     FormControlValidationDirective,
-    FormLabelDirective
+    FormLabelDirective,
+    FormLabelValidationDirective
   ]
 })
 export class SharedModule { }
