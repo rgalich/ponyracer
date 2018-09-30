@@ -11,7 +11,7 @@ export class FormControlValidationDirective {
 
   @HostBinding('class.is-invalid')
   get isInvalid() {
-    return this.ngControl && this.ngControl.dirty && this.ngControl.dirty && this.ngControl.invalid;
+    return this.ngControl && this.ngControl.dirty && this.ngControl.invalid;
   }
 
 }
