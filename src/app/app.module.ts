@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import { NgbAlertModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { JwtInterceptorService } from './jwt-interceptor.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgbAlertModule,
+    NgbPaginationModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [
