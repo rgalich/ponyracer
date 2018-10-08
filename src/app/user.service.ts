@@ -1,3 +1,4 @@
+import { MoneyHistoryModel } from './models/money-history.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -49,6 +50,10 @@ export class UserService {
     this.userEvents.next(null);
     window.localStorage.removeItem('rememberMe');
     this.jwtInterceptorService.removeJwtToken();
+  }
+
+  getMoneyHistory(): Observable<Array<MoneyHistoryModel>> {
+    return this.http.get<Array<MoneyHistoryModel>>(`${environment.baseUrl}/api/money/history`);
   }
 
   scoreUpdates(userId: number): Observable<UserModel> {

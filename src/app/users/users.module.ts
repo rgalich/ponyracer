@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { MoneyHistoryComponent } from './money-history/money-history.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    MoneyHistoryComponent
   ]
 })
 export class UsersModule { }
